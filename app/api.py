@@ -1,4 +1,5 @@
 from fastapi import Depends, FastAPI
+from fastapi.responses import RedirectResponse
 from fastapi_pagination import Page, add_pagination
 from sqlalchemy.orm import Session
 
@@ -13,8 +14,8 @@ add_pagination(app)
 
 
 @app.get("/")
-async def smoke():
-    return {"message": "OK"}
+async def docs():
+    return RedirectResponse(url='/docs')
 
 
 @app.post("/author", response_model=Author)
