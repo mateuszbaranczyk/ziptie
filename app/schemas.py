@@ -26,7 +26,6 @@ class AuthorBase(BaseModel):
     age: int
     nationality: str = Field(max_length=3)
     awards: str = Field(max_length=128)
-    books: Optional[list[Book]]
 
 
 class AuthorCreate(AuthorBase):
@@ -35,6 +34,7 @@ class AuthorCreate(AuthorBase):
 
 class Author(AuthorBase):
     id: int
+    books: Optional[list[Book]]
 
     class Config:
         orm_mode = True
