@@ -1,5 +1,4 @@
 services:
-
   database:
     image: mysql
     container_name: api-mysql
@@ -11,13 +10,12 @@ services:
     volumes:
         - ./init.sql:/data/application/init.sql
       
-
   api:
     build: .
     restart: unless-stopped
     container_name: api
-    depends_on: database
-    hostname: books-api
+    depends_on: 
+      - database
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
