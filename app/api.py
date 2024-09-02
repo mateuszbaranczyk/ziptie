@@ -5,10 +5,12 @@ from app.database import engine, get_db
 from app import models
 from sqlalchemy.orm import Session
 from app import crud
+from fastapi_pagination import Page, add_pagination
 
 models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI()
+add_pagination(app)
 
 
 @app.get("/")
@@ -28,7 +30,7 @@ async def create_book(book: BookCreate, db: Session = Depends(get_db)):
     return book_db
 
 
-@app.get("/author-books/{author_id}", response_model=Author)
-async def get_author_books(author_id: int, db: Session = Depends(get_db)):
-    author_db = crud.get_author(author_id, db)
-    return author_db
+@app.get("/authors", response_model=Page[Author])
+async def list_authors(db: Session = Depends(get_db)):
+    authors = crud.list_authors(db)
+    return authors

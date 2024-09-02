@@ -4,6 +4,9 @@ from app import models, schemas
 from sqlalchemy.exc import IntegrityError
 
 from fastapi import HTTPException
+from fastapi_pagination.ext.sqlalchemy import paginate
+from sqlalchemy import select
+from fastapi_pagination import Page
 
 
 def create_author(author: schemas.AuthorCreate, db: Session) -> models.Author:
@@ -18,13 +21,9 @@ def create_book(book: schemas.Book, db: Session) -> models.Book:
     return book_db
 
 
-def get_author(author_id: int, db: Session) -> models.Author:
-    author = (
-        db.query(models.Author).filter(models.Author.id == author_id).first()
-    )
-    if not author:
-        raise HTTPException(status_code=404, detail="Not found")
-    return author
+def list_authors(db: Session) -> Page[models.Author]:
+    authors = paginate(db, select(models.Author).order_by(models.Author.name))
+    return authors
 
 
 def db_add(item: models.Author | models.Book, db: Session) -> None:
