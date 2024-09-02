@@ -1,19 +1,40 @@
 from pydantic import BaseModel
+from typing import Optional
 
 
-class Book(BaseModel):
-    id: int
+class BookBase(BaseModel):
     title: str
     genre: str
     pages: int
     language: str
+    author_id: int
 
 
-class Author(BaseModel):
+class BookCreate(BookBase):
+    pass
+
+
+class Book(BookBase):
     id: int
+
+    class Config:
+        orm_mode = True
+
+
+class AuthorBase(BaseModel):
     name: str
     age: int
     nationality: str
     awards: str
+    books: Optional[list[Book]] = []
 
-    books: list[Book]
+
+class AuthorCreate(AuthorBase):
+    pass
+
+
+class Author(BaseModel):
+    id: int
+
+    class Config:
+        orm_mode = True
