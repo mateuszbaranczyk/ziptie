@@ -1,12 +1,12 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
 
 
 class BookBase(BaseModel):
-    title: str
-    genre: str
+    title: str = Field(max_length=128)
+    genre: str = Field(max_length=32)
     pages: int
-    language: str
+    language: str = Field(max_length=3)
     author_id: int
 
 
@@ -22,11 +22,11 @@ class Book(BookBase):
 
 
 class AuthorBase(BaseModel):
-    name: str
+    name: str = Field(max_length=128)
     age: int
-    nationality: str
-    awards: str
-    books: Optional[list[Book]] = []
+    nationality: str = Field(max_length=3)
+    awards: str = Field(max_length=128)
+    books: Optional[list[Book]]
 
 
 class AuthorCreate(AuthorBase):
