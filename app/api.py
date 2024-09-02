@@ -1,11 +1,10 @@
-from fastapi import FastAPI, Depends
-
-from app.schemas import AuthorCreate, Author, Book, BookCreate
-from app.database import engine, get_db
-from app import models
-from sqlalchemy.orm import Session
-from app import crud
+from fastapi import Depends, FastAPI
 from fastapi_pagination import Page, add_pagination
+from sqlalchemy.orm import Session
+
+from app import crud, models
+from app.database import engine, get_db
+from app.schemas import Author, AuthorCreate, Book, BookCreate
 
 models.Base.metadata.create_all(bind=engine)
 

@@ -1,12 +1,11 @@
+from fastapi import HTTPException
+from fastapi_pagination import Page
+from fastapi_pagination.ext.sqlalchemy import paginate
+from sqlalchemy import select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app import models, schemas
-from sqlalchemy.exc import IntegrityError
-
-from fastapi import HTTPException
-from fastapi_pagination.ext.sqlalchemy import paginate
-from sqlalchemy import select
-from fastapi_pagination import Page
 
 
 def create_author(author: schemas.AuthorCreate, db: Session) -> models.Author:
