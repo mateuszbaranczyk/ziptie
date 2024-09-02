@@ -8,4 +8,4 @@ EXPOSE 8011
 
 ENV PYTHONPATH=/app
 
-CMD ["uvicorn", "app.api:app", "--port=8011"]
+CMD ["uvicorn", "app.api:app", "--host=0.0.0.0", "--port=8011"]

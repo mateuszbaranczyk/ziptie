@@ -17,6 +17,7 @@ services:
     restart: unless-stopped
     container_name: api
     depends_on: database
+    hostname: books-api
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
       MYSQL_DATABASE: ${MYSQL_DATABASE}
