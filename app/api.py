@@ -1,6 +1,6 @@
 from fastapi import FastAPI, Depends
 
-from app.schemas import AuthorCreate, Author
+from app.schemas import AuthorCreate, Author, Book, BookCreate
 from app.database import engine, get_db
 from app import models
 from sqlalchemy.orm import Session
@@ -22,11 +22,13 @@ async def create_author(author: AuthorCreate, db: Session = Depends(get_db)):
     return author_db
 
 
-@app.post("/book")
-async def create_book():
-    pass
+@app.post("/book", response_model=Book)
+async def create_book(book: BookCreate, db: Session = Depends(get_db)):
+    book_db = create_book(book)
+    return book_db
 
 
-@app.get("/author-books/{author_id}")
+@app.get("/author-books/{author_id}", response_model=Author)
 async def get_author_books(author_id: int):
-    pass
+    author_db = get_author(author_id)
+    return author_db
