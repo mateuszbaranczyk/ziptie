@@ -1,0 +1,24 @@
+services:
+
+  database:
+    image: mysql
+    container_name: api-mysql
+    hostname: ${MYSQL_HOST}
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_PORT: ${MYSQL_PORT}
+    volumes:
+        - ./init.sql:/data/application/init.sql
+      
+
+  api:
+    build: .
+    restart: unless-stopped
+    container_name: api
+    depends_on: database
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_HOST: ${MYSQL_HOST}
+      MYSQL_PORT: ${MYSQL_PORT}
