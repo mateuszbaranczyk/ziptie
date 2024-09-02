@@ -10,6 +10,7 @@ python = "^3.10"
 fastapi = {extras = ["standard"], version = "^0.112.2"}
 sqlalchemy = "^2.0.32"
 fastapi-pagination = "^0.12.26"
+pymysql = "^1.1.1"
 
 
 [tool.poetry.group.dev.dependencies]
