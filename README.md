@@ -11,5 +11,5 @@ Service will be ready after `api        | INFO:     Uvicorn running on http://0.
 
 After running project docs are available [here](http://localhost:8011). Fell free to play available endpoints. 
 
-It is also point to the Internet, so you don't have to build it locally. [https://zip.rberry.co/docs](https://zip.rberry.co/docs)
+(No longer avaliable!)It is also point to the Internet, so you don't have to build it locally. [https://zip.rberry.co/docs](https://zip.rberry.co/docs) 
 
